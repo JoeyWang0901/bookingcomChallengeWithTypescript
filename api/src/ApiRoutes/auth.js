@@ -2,7 +2,7 @@ import express from "express"
 import { login, register } from "../RoutesController/auth.js";
 
 const router = express.Router()
-//get 就像app.get 運用router把app.get可以分門別類 
+//get 就像app.get 運用router把app.get可以分門別類
 //這邊auth是負責處理註冊與登入的地方
 router.post("/register",register);
 //用post是因為我們要把帳密那些使用者資料上傳，register等同於創建user

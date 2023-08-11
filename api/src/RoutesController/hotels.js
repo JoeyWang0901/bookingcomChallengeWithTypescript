@@ -2,7 +2,7 @@ import { errorMessage } from "../errorMessage.js"
 import Hotel from "../models/Hotel.js"
 
 export const createHotel = async(req,res,next)=>{ //新增next
-    const newHotel = new Hotel(req.body) 
+    const newHotel = new Hotel(req.body)
     try {
         const saveHotel = await newHotel.save()
         res.status(200).json(saveHotel)
@@ -12,7 +12,6 @@ export const createHotel = async(req,res,next)=>{ //新增next
 }
 export const getHotel = async(req,res,next)=>{
     const id = req.params.id;
-    next()
     try{
        const getHotel = await Hotel.findById(id)
         res.status(200).json(getHotel)
@@ -44,6 +43,6 @@ export const getAllHotels = async(req,res,next)=>{
         const hotelsList = await Hotel.find()
         res.status(200).json(hotelsList)
     }catch(error){
-        next(errorMessage(500,"無法抓取所有飯店資料",error)) 
+        next(errorMessage(500,"無法抓取所有飯店資料",error))
     }
 }

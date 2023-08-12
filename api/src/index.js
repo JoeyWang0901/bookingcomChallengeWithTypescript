@@ -1,6 +1,6 @@
 import mongoose from "mongoose"
 //ES6後import 與export 取代了原本舊版的require
-import express  from "express"; 
+import express  from "express";
 import dotenv from "dotenv"
 import hotelsApiRoute from "./ApiRoutes/hotels.js"
 import roomsApiRoute from "./ApiRoutes/rooms.js"

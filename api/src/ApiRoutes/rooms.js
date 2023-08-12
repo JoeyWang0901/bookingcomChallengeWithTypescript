@@ -1,11 +1,11 @@
-import express from "express"
+    import express from "express"
 import { createRoom, deleteRoom, getAllRooms, getHotelRooms, getRoom, updatedRoom } from "../RoutesController/room.js";
 
 
 const router = express.Router()
 
 //前面的url是/api/v1/rooms
-//創建第一個room 
+//創建第一個room
 router.post("/:hotelid",createRoom);
 //更改room updatedRoom
 router.put("/:id",updatedRoom)

@@ -1,8 +1,9 @@
+import { RequestHandler } from "express";
 import { errorMessage } from "../errorMessage.js";
 import User from "../models/User.js";
 
 //更新使用者 跟hotel的CRUD一模一樣
-export const updateUser = async (req, res, next) => {
+export const updateUser: RequestHandler = async (req, res, next) => {
     const id = req.params.id;
     const body = req.body;
     try{
@@ -14,7 +15,7 @@ export const updateUser = async (req, res, next) => {
     }
 }
 //刪除使用者
-export const deletedUser = async (req, res, next) => {
+export const deletedUser: RequestHandler = async (req, res, next) => {
     const id = req.params.id;
     try{
         await User.findByIdAndDelete(id)
@@ -24,7 +25,7 @@ export const deletedUser = async (req, res, next) => {
     }
 }
 //讀取使用者資料
-export const getUser = async (req, res, next) => {
+export const getUser: RequestHandler = async (req, res, next) => {
     const id = req.params.id;
     try{
         const getUser= await User.findById(id)
@@ -34,7 +35,7 @@ export const getUser = async (req, res, next) => {
     }
 }
 //讀取全部使用者資料
-export const getAllUsers = async (req, res, next) => {
+export const getAllUsers: RequestHandler = async (req, res, next) => {
     try{
         const getUsers= await User.find()
         res.status(200).json(getUsers)

@@ -1,8 +1,9 @@
 import bcrypt from "bcryptjs"
 import { errorMessage } from "../errorMessage.js";
 import User from "../models/User.js";
+import { RequestHandler } from "express";
 
-export const register = async (req,res,next)=>{
+export const register: RequestHandler = async (req,res,next)=>{
     const registerData = req.body
     try{
         const registerWrong = await User.findOne({username:registerData.username}) || await User.findOne({email:registerData.email})
@@ -18,7 +19,7 @@ export const register = async (req,res,next)=>{
         }
         )
         const saveUser =  await newUser.save();
-        //但這邊要分離處理來保護我們的使用者資料 
+        //但這邊要分離處理來保護我們的使用者資料
         res.status(200).json(saveUser)
     }catch(error)
     {
@@ -27,7 +28,7 @@ export const register = async (req,res,next)=>{
 }
 
 //account number 張號可以輸入 信箱與使用者姓名
-export const login = async (req,res,next)=>{
+export const login: RequestHandler = async (req,res,next)=>{
     const loginData = req.body
     try{
     const userData =  await User.findOne({username:loginData.account}) || await User.findOne({email:loginData.account});
@@ -57,9 +58,9 @@ export const login = async (req,res,next)=>{
 //         }
 //         )
 //         const saveUser = await newUser.save();
-//         //但這邊要分離處理來保護我們的使用者資料 
+//         //但這邊要分離處理來保護我們的使用者資料
 //         res.status(200).json("註冊成功"+saveUser)
-       
+
 //     }catch(error)
 //     {
 //         next(errorMessage(500, "註冊失敗",error))

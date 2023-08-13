@@ -1,7 +1,10 @@
 import { errorMessage } from "../errorMessage.js"
 import Hotel from "../models/Hotel.js"
+import { RequestHandler } from "express"
 
-export const createHotel = async(req,res,next)=>{ //新增next
+
+
+export const createHotel: RequestHandler = async(req,res,next)=>{ //新增next
     const newHotel = new Hotel(req.body)
     try {
         const saveHotel = await newHotel.save()
@@ -10,7 +13,7 @@ export const createHotel = async(req,res,next)=>{ //新增next
         next(errorMessage(500,"資料上傳錯誤請確認格式")) //後來我們想要客製化的
     }
 }
-export const getHotel = async(req,res,next)=>{
+export const getHotel: RequestHandler = async(req,res,next)=>{
     const id = req.params.id;
     try{
        const getHotel = await Hotel.findById(id)
@@ -19,7 +22,7 @@ export const getHotel = async(req,res,next)=>{
         next(errorMessage(500,"找不到資料，請檢查使否有此id",error)) //後來我們想要客製化的
     }
 }
-export const updatedHotel =async(req,res,next)=>{
+export const updatedHotel: RequestHandler =async(req,res,next)=>{
     const id = req.params.id;
     const body = req.body
     try{
@@ -29,7 +32,7 @@ export const updatedHotel =async(req,res,next)=>{
         next(errorMessage(500,"修改失敗，請確認是否有其id與是否欄位輸入格式正確",error)) //後來我們想要客製化的
     }
 }
-export const deleteHotel = async(req,res,next)=>{
+export const deleteHotel: RequestHandler = async(req,res,next)=>{
     const id = req.params.id;
     try{
         await Hotel.findByIdAndDelete(id)
@@ -38,7 +41,7 @@ export const deleteHotel = async(req,res,next)=>{
         next(errorMessage(500,"刪除失敗，請確認是否有其id",error)) //後來我們想要客製化的
     }
 }
-export const getAllHotels = async(req,res,next)=>{
+export const getAllHotels: RequestHandler = async(req,res,next)=>{
     try{
         const hotelsList = await Hotel.find()
         res.status(200).json(hotelsList)

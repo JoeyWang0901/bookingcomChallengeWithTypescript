@@ -33,7 +33,7 @@ export const login: RequestHandler = async (req,res,next)=>{
     try{
     const userData =  await User.findOne({username:loginData.account}) || await User.findOne({email:loginData.account});
     if(!userData)return(next(errorMessage(404,"沒有此使用者")))
-    const isPasswordCorrect = await bcrypt.compare(loginData.password,userData.password)
+    const isPasswordCorrect = await bcrypt.compare(loginData.password,<string>userData.password)
     if(!isPasswordCorrect)return(next(errorMessage(404, "輸入密碼錯誤")))
     //這邊雖然知道是密碼錯誤、但也可以輸入為 "輸入帳號密碼錯誤" 來防止有心人破解密碼
     res.status(200).json(`${userData.username}登入成功`)

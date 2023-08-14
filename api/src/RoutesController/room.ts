@@ -37,12 +37,9 @@ export const deleteRoom: RequestHandler = async (req, res, next) => {
    const hotelId = req.params.hotelid;
    const roomId =req.params.id;
     try{
-        await Room.findByIdAndDelete(req.params.id)
+        await Room.findByIdAndDelete(roomId)
         try{
-
-            await Hotel.findByIdAndUpdate(hotelId,
-                {$pull: { room: roomId}})
-
+            await Hotel.findByIdAndUpdate(hotelId, {$pull: { rooms: roomId}});
         }catch(error) {
             next(error)
         }

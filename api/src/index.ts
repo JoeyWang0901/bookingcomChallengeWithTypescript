@@ -1,6 +1,7 @@
 import mongoose from "mongoose"
 //ES6後import 與export 取代了原本舊版的require
 import express, { ErrorRequestHandler } from "express";
+import cookieParser from "cookie-parser";
 import dotenv from "dotenv"
 import hotelsApiRoute from "./ApiRoutes/hotels.js"
 import roomsApiRoute from "./ApiRoutes/rooms.js"
@@ -35,7 +36,7 @@ app.listen(port, () => {
     console.log(`connected to ${port} backend`)
     //並要像npm start 一樣啟動它，
 })
-
+app.use(cookieParser())//讓req.cookies參敷又叫cookieParser(req
 app.use(express.json())//讓上傳的req.body可以視為json
 
 ///middlewares中間代理商概念

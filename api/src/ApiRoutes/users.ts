@@ -1,20 +1,21 @@
 import express from "express"
 import { deletedUser, getAllUsers, getUser, updateUser } from "../RoutesController/user.js"
+import { varifyAdmin, varifyUser } from "../JWT_Token.js"
 
 const router = express.Router()
-//get 就像app.get 運用router把app.get可以分門別類 
+//get 就像app.get 運用router把app.get可以分門別類
 // router.get("/",(req,res)=>{
 //     res.send("這邊是UsersApi End points連接點")
 // })
 
 //更新user
-router.put("/:id",updateUser)
+router.put("/:id", varifyUser ,updateUser)
 //刪除
-router.delete("/:id",deletedUser)
+router.delete("/:id", varifyUser,deletedUser)
 //讀取 單一用戶資料
-router.get("/:id",getUser)
+router.get("/:id",varifyUser, getUser)
 //讀取全部用戶資料
-router.get("/",getAllUsers)
+router.get("/",varifyAdmin, getAllUsers)
 
 export default router
 

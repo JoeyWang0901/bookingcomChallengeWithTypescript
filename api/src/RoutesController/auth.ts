@@ -2,6 +2,7 @@ import bcrypt from "bcryptjs"
 import { errorMessage } from "../errorMessage.js";
 import User from "../models/User.js";
 import { RequestHandler } from "express";
+import jwt from "jsonwebtoken";
 
 export const register: RequestHandler = async (req,res,next)=>{
     const registerData = req.body
@@ -34,9 +35,15 @@ export const login: RequestHandler = async (req,res,next)=>{
     const userData =  await User.findOne({username:loginData.account}) || await User.findOne({email:loginData.account});
     if(!userData)return(next(errorMessage(404,"沒有此使用者")))
     const isPasswordCorrect = await bcrypt.compare(loginData.password,<string>userData.password)
-    if(!isPasswordCorrect)return(next(errorMessage(404, "輸入密碼錯誤")))
-    //這邊雖然知道是密碼錯誤、但也可以輸入為 "輸入帳號密碼錯誤" 來防止有心人破解密碼
-    res.status(200).json(`${userData.username}登入成功`)
+    if(!isPasswordCorrect)return(next(errorMessage(404, "輸入帳號密碼錯誤")))
+
+    const token = jwt.sign({id:userData._id, isAdmin:userData.isAdmin},
+        process.env.JWT??'secretkey');
+
+    res.cookie('JWT_token', token, {
+        httpOnly: true
+    })
+    .status(200).json(`${userData.username}登入成功`)
     }catch(error)
     {
         next(errorMessage(500, "登入失敗",error))

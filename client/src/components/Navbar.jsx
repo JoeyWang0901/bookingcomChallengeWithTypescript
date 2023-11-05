@@ -17,18 +17,18 @@ const Navbar = ({type}) => {
                     <div className="right">
                         <button className='navButtonFlag' />
                         <button className="navButtonNotif">使用webpack測試</button>
-                        {  type=="auth" ? <></> :<>
+                        {  type==="auth" ? <></> :<>
                         <Link to="/register">
                         <button className="navButton">註冊</button>
-                        </Link>  
+                        </Link>
                         <Link to="/login">
                         <button className="navButton">登入</button>
-                        </Link>  
+                        </Link>
                         </>
                          }
                     </div>
                 </div>
-                {type=="auth"? <></> :
+                {type==="auth"? <></> :
                 <div className="lineTwo">
                     <div className="item active">
                         <FontAwesomeIcon icon={faBed} />

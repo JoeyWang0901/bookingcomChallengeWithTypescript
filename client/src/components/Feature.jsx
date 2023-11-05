@@ -2,10 +2,16 @@ import React from 'react'
 import Categories from '../subcomponents/Categories'
 import PostCards from '../subcomponents/PostCards'
 import PopularHotels from '../subcomponents/PopularHotels'
+
 import { CategoriesCities, CategoriesType, PopularHotelsData} from '../data'
 import "./feature.scss"
+import useFetch from '../hooks/useFetch'
 const Feature = () => {
-    
+
+    const {data, loading, error} = useFetch("/hotels")
+    console.log(data);
+    console.log("我要幫忙先展示feature clg")
+
     return (
         <div className='feature'>
             <div className="container">
@@ -29,7 +35,7 @@ const Feature = () => {
                     <h2>人氣民宿、公寓類型住宿</h2>
                 </div>
                 <div className="listItems">
-                    <PopularHotels dataArray={PopularHotelsData}/>
+                    <PopularHotels dataArray={data}/>
                 </div>
             </div>
         </div>

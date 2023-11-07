@@ -1,6 +1,7 @@
 import React from 'react'
 import "./categories.scss"
 import useFetch from '../hooks/useFetch'
+import Skeleton from '../components/Skeleton'
 const Categories = ({dataArray, url}) => {
   const {data, loading, error} = useFetch(url)
   return (
@@ -13,7 +14,7 @@ const Categories = ({dataArray, url}) => {
               {item.name}
             </div>
             <div className="desc">
-              {`${data[index]}間住宿`}
+              {loading ? <Skeleton type={"Amount"} length={7}/> :`${data[index]}間住宿`}
             </div>
           </div>
         </div>)}

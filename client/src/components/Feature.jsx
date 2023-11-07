@@ -9,12 +9,9 @@ import useFetch from '../hooks/useFetch'
 const Feature = () => {
 
     const {data, loading, error} = useFetch("/hotels?popularHotel=true")
-    console.log(data);
 
     const typeUrl = `/hotels/amountoftype?type=${CategoriesType.map((type)=>type.name)}`
     const citiesUrl = `/hotels/amountofcities?cities=${CategoriesCities.map((city)=>city.name)}`
-
-    console.log(typeUrl, citiesUrl)
 
     return (
         <div className='feature'>
@@ -39,7 +36,7 @@ const Feature = () => {
                     <h2>人氣民宿、公寓類型住宿</h2>
                 </div>
                 <div className="listItems">
-                    <PopularHotels dataArray={data}/>
+                    <PopularHotels dataArray={data} loading={loading}/>
                 </div>
             </div>
         </div>

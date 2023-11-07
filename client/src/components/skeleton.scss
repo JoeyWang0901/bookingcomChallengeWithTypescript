@@ -1,0 +1,57 @@
+@keyframes skeleton {
+    to {
+        opacity: 0.6;
+    }
+}
+
+.popilarHotelSK {
+    div{
+        border-radius: 5px;
+    }
+    position: relative;
+    animation: skeleton 1s ease infinite alternate;
+    .imgSK{
+        width: 250px;
+        height: 230px;
+        background-color: #ECECEC;
+        margin-bottom: 2px;
+        animation: skeleton 1s ease infinite alternate;
+    }
+    .InfoSK {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        .titleSK {
+            background-color: #ECECEC;
+            width: 200px;
+            height: 25px;
+            animation: skeleton 1s ease infinite alternate;
+        }
+        .subTitleSK {
+            background-color: #ECECEC;
+            width: 70px;
+            height: 15px;
+            animation: skeleton 1s ease infinite alternate;
+        }
+        .priceSK{
+            background-color: #ECECEC;
+            width: 150px;
+            height: 20px;
+            animation: skeleton 1s ease infinite alternate;
+        }
+        .reteAndCommentSK {
+            background-color: #ECECEC;
+            width: 190px;
+            height: 25px;
+            animation: skeleton 1s ease infinite alternate;
+        }
+    }
+}
+
+.amountSK{
+    position: relative;
+    width: 150px;
+    height: 30px;
+    background-color: #ECECEC;
+    animation: skeleton 1s ease infinite alternate;
+}

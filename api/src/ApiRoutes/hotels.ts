@@ -1,6 +1,6 @@
 import express from "express"
 import Hotel from "../models/Hotel.js"
-import { createHotel, deleteHotel, getAllHotels, getHotel, updatedHotel } from "../RoutesController/hotels.js"
+import { createHotel, deleteHotel, getAllHotels, getHotel, updatedHotel , amountOfType, amountOfCities} from "../RoutesController/hotels.js"
 
 
 //這邊前面的url是/api/v1/hotels
@@ -16,5 +16,9 @@ router.delete("/:id",deleteHotel)
 //抓取所有住宿資料 應為目前沒有重複api url除了post的創建一樣
 //所以可以用/api/v1/hotels/ 的api url 配合get 來抓取所有住宿資料
 router.get("/",getAllHotels)
+
+router.get("/amountoftype", amountOfType)
+
+router.get("/amountofcities", amountOfCities)
 
 export default router

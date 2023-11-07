@@ -42,10 +42,39 @@ export const deleteHotel: RequestHandler = async(req,res,next)=>{
     }
 }
 export const getAllHotels: RequestHandler = async(req,res,next)=>{
+    const withQuery = req.query;
     try{
-        const hotelsList = await Hotel.find()
+        const hotelsList = await Hotel.find(
+            {
+                ...withQuery
+            }
+        ).limit(7)
         res.status(200).json(hotelsList)
     }catch(error){
         next(errorMessage(500,"無法抓取所有飯店資料",error))
+    }
+}
+
+export const amountOfType: RequestHandler = async(req,res,next)=>{
+    const type = (<string>req.query.type).split(',');
+    try{
+        const list = await Promise.all(type.map(type => {
+            return Hotel.countDocuments({type: type})
+        }))
+        res.status(200).json(list)
+    }catch(error){
+        next(errorMessage(500, "無法抓取住宿種類", error))
+    }
+}
+
+export const amountOfCities: RequestHandler = async(req,res,next)=>{
+    const cities = (<string>req.query.cities).split(',');
+    try{
+        const list = await Promise.all(cities.map(city => {
+            return Hotel.countDocuments({city: city})
+        }))
+        res.status(200).json(list)
+    }catch(error){
+        next(errorMessage(500, "無法統計各個城市的提供住宿的數量", error))
     }
 }

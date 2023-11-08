@@ -9,9 +9,10 @@ class ErrorMessage extends Error
 
 export const errorMessage=(status:number, message:string,err?: any)=>{
     const error = new ErrorMessage();
-    const orignalErr = err?.message || "條件錯誤";
+    const orignalErr = message || "條件錯誤";
     //怕到時候不一定要傳error變數
-    error.status= status;
-    error.message=message+`錯誤詳細描述: `+orignalErr;
+    error.status = status;
+    // error.message = message+` 錯誤詳細描述: `+orignalErr;
+    error.message = orignalErr;
     return error;
 }
